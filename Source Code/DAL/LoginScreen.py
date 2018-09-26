@@ -42,7 +42,12 @@ class Ui_LoginScreen(object):
         self.pushButton = QtWidgets.QPushButton(LoginScreen)
         self.pushButton.setGeometry(QtCore.QRect(340, 320, 93, 28))
         self.pushButton.setObjectName("pushButton")
+
+        #### Login Event ####
         
+
+        
+        ######### Login Error Occurs##########
         self.pushButton.clicked.connect(self.LoginError)
 
 
