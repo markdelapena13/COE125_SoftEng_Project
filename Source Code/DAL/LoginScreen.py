@@ -7,10 +7,23 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sqlite3
 from LoginErr import LoginError
 from Signup import Ui_Dialog
 import sys
 class Ui_LoginScreen(object):
+    def loginCheck(self):
+        print("login button is pressed")
+        Username = self.lineEdit.text()
+        Password = self.lineEdit_2.text()
+        connection = sqlite3.connect("Databaselog.db")
+        result = connection.execute("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?",(Username, Password))
+        if( len(result.fetchall()) > 0):
+            print("user found")
+        else:
+            print("no user found")
+    def signupcheck(self):
+        print("register is pressed")
     
     def LoginError(self):
         self.window = QtWidgets.QDialog()
@@ -42,16 +55,19 @@ class Ui_LoginScreen(object):
         self.pushButton = QtWidgets.QPushButton(LoginScreen)
         self.pushButton.setGeometry(QtCore.QRect(340, 320, 93, 28))
         self.pushButton.setObjectName("pushButton")
-        
+##################button#####
+        self.pushButton.clicked.connect(self.loginCheck)
         self.pushButton.clicked.connect(self.LoginError)
-
+#####################
 
         
         self.pushButton_2 = QtWidgets.QPushButton(LoginScreen)
         self.pushButton_2.setGeometry(QtCore.QRect(300, 410, 171, 41))
         self.pushButton_2.setObjectName("pushButton_2")
-
+######
         self.pushButton_2.clicked.connect(self.register)
+        self.pushButton_2.clicked.connect(self.signupcheck)
+########
         self.label_3 = QtWidgets.QLabel(LoginScreen)
         self.label_3.setGeometry(QtCore.QRect(330, 370, 141, 31))
         self.label_3.setObjectName("label_3")
