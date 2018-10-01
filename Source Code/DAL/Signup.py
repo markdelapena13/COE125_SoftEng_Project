@@ -5,10 +5,42 @@
 # Created by: PyQt5 UI code generator 5.4.1
 #
 # WARNING! All changes made in this file will be lost!
-
+import sqlite3
+import os.path
 from PyQt5 import QtCore, QtGui, QtWidgets
+from registerSucc import Succ
+from RegisterError import Ui_ERROR
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "InventoryDatabase.db")
+conn=sqlite3.connect(db_path)
 
 class Ui_Dialog(object):
+
+    def registerSucc(self):
+        self.window=QtWidgets.QDialog()
+        self.succ = Succ()
+        self.succ.setupUi(self.window)
+        self.window.show()
+     
+    def registerUser(self):
+        Username=self.UserEnter.text()
+        Password=self.PassEnter.text()
+        sql='''INSERT INTO Users(Username,Password) VALUES(?,?)'''
+        cur=conn.cursor()
+        values=(Username,Password)
+        cur.execute(sql, values)
+        conn.commit()
+        conn.close()
+        displayError(self)
+        
+    def displayError(self):
+        self.window=QtWidgets.QDialog()
+        self.regerr= Ui_ERROR()
+        self.regerr.setupUi(self.window)
+        self.window.show()
+
+
+    
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(614, 378)
@@ -24,15 +56,32 @@ class Ui_Dialog(object):
         self.PassLabel = QtWidgets.QLabel(Dialog)
         self.PassLabel.setGeometry(QtCore.QRect(150, 140, 131, 41))
         self.PassLabel.setObjectName("PassLabel")
+
+
+        
+        ####### Field to Enter Username #########
         self.UserEnter = QtWidgets.QLineEdit(Dialog)
         self.UserEnter.setGeometry(QtCore.QRect(150, 80, 271, 31))
         self.UserEnter.setObjectName("UserEnter")
+
+        ######## Field to Enter Password #######
+                                            
         self.PassEnter = QtWidgets.QLineEdit(Dialog)
         self.PassEnter.setGeometry(QtCore.QRect(150, 190, 281, 31))
         self.PassEnter.setObjectName("PassEnter")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(230, 280, 121, 41))
-        self.pushButton.setObjectName("pushButton")
+
+
+
+        ####### button to register #########
+        self.pushReg = QtWidgets.QPushButton(Dialog)
+        self.pushReg.setGeometry(QtCore.QRect(230, 280, 121, 41))
+        self.pushReg.setObjectName("pushReg")
+        self.pushReg.clicked.connect(self.registerUser)
+        self.pushReg.clicked.connect(self.registerSucc)
+        
+        
+
+        
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
@@ -44,7 +93,11 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "User Registration"))
         self.UserLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:10pt;\">Desired Username:</span></p></body></html>"))
         self.PassLabel.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:10pt;\">Password:</span></p></body></html>"))
-        self.pushButton.setText(_translate("Dialog", "Register"))
+        self.pushReg.setText(_translate("Dialog", "Register"))
+
+
+        
+        
 
 
 if __name__ == "__main__":
