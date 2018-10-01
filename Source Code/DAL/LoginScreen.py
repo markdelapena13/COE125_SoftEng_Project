@@ -6,6 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+#edit made#
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from LoginErr import LoginError
 from Signup import Ui_Dialog
