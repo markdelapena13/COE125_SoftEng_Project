@@ -5,13 +5,16 @@
 # Created by: PyQt5 UI code generator 5.4.1
 #
 # WARNING! All changes made in this file will be lost!
-
+import sqlite3
+import os.path
 from PyQt5 import QtCore, QtGui, QtWidgets
 from registerSucc import Succ
-
+from RegisterError import Ui_ERROR
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "InventoryDatabase.db")
+conn=sqlite3.connect(db_path)
 
 class Ui_Dialog(object):
-
 
     def registerSucc(self):
         self.window=QtWidgets.QDialog()
@@ -20,12 +23,21 @@ class Ui_Dialog(object):
         self.window.show()
      
     def registerUser(self):
-        users = open("Credentials.txt","a")
-        users.write(self.UserEnter.text())
-        users.write(",")
-        users.write(self.PassEnter.text())
-        users.write("\n")
-        users.close()
+        Username=self.UserEnter.text()
+        Password=self.PassEnter.text()
+        sql='''INSERT INTO Users(Username,Password) VALUES(?,?)'''
+        cur=conn.cursor()
+        values=(Username,Password)
+        cur.execute(sql, values)
+        conn.commit()
+        conn.close()
+        displayError(self)
+        
+    def displayError(self):
+        self.window=QtWidgets.QDialog()
+        self.regerr= Ui_ERROR()
+        self.regerr.setupUi(self.window)
+        self.window.show()
 
 
     
