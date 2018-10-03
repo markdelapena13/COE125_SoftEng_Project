@@ -11,7 +11,7 @@ import sqlite3
 
 import sys
 sys.path.append('../')
-from BL.AccountChecker import VerifyCredentials
+from BL.AccountR_W import VerifyCredentials
 from LoginErr import LoginError
 from DAL.Signup import User_signup
 
@@ -97,7 +97,7 @@ class Ui_LoginScreen(object):
         #########    Login Event Initiates   ##############
         Username = self.lineEdit.text()
         Password = self.lineEdit_2.text()
-        self.pushButton.clicked.connect(lambda: VerifyCredentials.Verify(Username,Password))
+        self.pushButton.clicked.connect(lambda: VerifyCredentials.AskDatabase(Username,Password))
 
 
     def retranslateUi(self, LoginScreen):
