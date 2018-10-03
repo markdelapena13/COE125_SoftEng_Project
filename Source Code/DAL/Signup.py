@@ -7,14 +7,18 @@
 # WARNING! All changes made in this file will be lost!
 import sqlite3
 import os.path
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-from registerSucc import Succ
-from RegisterError import Ui_ERROR
+sys.path.append('../')
+from UI.registerSucc import Succ
+from UI.RegisterError import Ui_ERROR
+
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(BASE_DIR, "InventoryDatabase.db")
+db_path = "../../Database/InventoryDatabase.db"
 conn=sqlite3.connect(db_path)
 
-class Ui_Dialog(object):
+class User_signup(object):
 
     def registerSucc(self):
         self.window=QtWidgets.QDialog()
@@ -106,7 +110,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = User_signup() #class name of called file
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

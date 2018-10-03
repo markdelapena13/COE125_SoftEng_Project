@@ -8,21 +8,17 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
-from LoginErr import LoginError
-from Signup import Ui_Dialog
+
 import sys
+sys.path.append('../')
+from BL.AccountChecker import VerifyCredentials
+from LoginErr import LoginError
+from DAL.Signup import User_signup
+
+
 class Ui_LoginScreen(object):
-    def loginCheck(self):
-        #print("login button is pressed")
-        Username = self.lineEdit.text()
-        Password = self.lineEdit_2.text()
-        connection = sqlite3.connect("InventoryDatabase.db")
-        result = connection.execute("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?",(Username, Password))
-        if( len(result.fetchall()) > 0):
-            print("user found")
-        else:
-            self.pushButton.clicked.connect(self.LoginError)
-            
+      
+      
     def signupcheck(self):
         print("register is pressed")
     
@@ -35,7 +31,7 @@ class Ui_LoginScreen(object):
 
     def register(self):
         self.window = QtWidgets.QDialog()
-        self.reg = Ui_Dialog()
+        self.reg = User_signup()
         self.reg.setupUi(self.window)
         self.window.show()
 
@@ -56,9 +52,6 @@ class Ui_LoginScreen(object):
         self.pushButton = QtWidgets.QPushButton(LoginScreen)
         self.pushButton.setGeometry(QtCore.QRect(340, 320, 93, 28))
         self.pushButton.setObjectName("pushButton")
-##################button#####
-        self.pushButton.clicked.connect(self.loginCheck)
-
 
 
         
@@ -98,6 +91,14 @@ class Ui_LoginScreen(object):
 
         self.retranslateUi(LoginScreen)
         QtCore.QMetaObject.connectSlotsByName(LoginScreen)
+
+
+
+        #########    Login Event Initiates   ##############
+        Username = self.lineEdit.text()
+        Password = self.lineEdit_2.text()
+        self.pushButton.clicked.connect(lambda: VerifyCredentials.Verify(Username,Password))
+
 
     def retranslateUi(self, LoginScreen):
         _translate = QtCore.QCoreApplication.translate
