@@ -21,6 +21,8 @@ class Ui_Dialog(object):
         self.succ = Succ()
         self.succ.setupUi(self.window)
         self.window.show()
+		
+		
      
     def registerUser(self):
         Username=self.UserEnter.text()
@@ -31,7 +33,7 @@ class Ui_Dialog(object):
         cur.execute(sql, values)
         conn.commit()
         conn.close()
-        displayError(self)
+        #displayError(self)
         
     def displayError(self):
         self.window=QtWidgets.QDialog()
