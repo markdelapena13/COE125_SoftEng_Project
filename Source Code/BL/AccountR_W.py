@@ -19,8 +19,3 @@ class Write2DB:
         Signup.User_signup
 
 
-##class DisplayDB_UI:
-##    
-##        
-##
-##

@@ -14,12 +14,18 @@ sys.path.append('../')
 from BL.AccountR_W import VerifyCredentials
 from LoginErr import LoginError
 from DAL.Signup import User_signup
-
+from DAL.Meme import MainDatabase
 
 
 class Ui_LoginScreen(object):
       
-      
+
+    def showMainDB(self):
+        self.window = QtWidgets.QMainWindow()
+        self.MainDB = MainDatabase()
+        self.MainDB.MainUi(self.window)
+        self.window.show()
+        
     def signupcheck(self):
         print("register is pressed")
     
@@ -56,16 +62,14 @@ class Ui_LoginScreen(object):
 
 
         
-        #self.pushButton.clicked.connect(self.LoginError)
-#####################
-
-        
         self.pushButton_2 = QtWidgets.QPushButton(LoginScreen)
         self.pushButton_2.setGeometry(QtCore.QRect(300, 410, 171, 41))
         self.pushButton_2.setObjectName("pushButton_2")
-######
+
+        
+###### event to register user ########
         self.pushButton_2.clicked.connect(self.register)
-        self.pushButton_2.clicked.connect(self.signupcheck)
+
 ########
         self.label_3 = QtWidgets.QLabel(LoginScreen)
         self.label_3.setGeometry(QtCore.QRect(330, 370, 141, 31))
@@ -99,8 +103,12 @@ class Ui_LoginScreen(object):
 
 
         #########    Login Event Initiates   ##############
-        self.pushButton.clicked.connect(lambda: VerifyCredentials.AskDatabase("456","123"))
-
+        
+                                        
+        self.pushButton.clicked.connect(self.getCredentials)
+        
+        
+        
 
     def retranslateUi(self, LoginScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -112,7 +120,11 @@ class Ui_LoginScreen(object):
         self.label_3.setText(_translate("LoginScreen", "Not yet a member?"))
         self.label_4.setText(_translate("LoginScreen", "<html><head/><body><p><span style=\" font-size:10pt;\">Username:</span></p></body></html>"))
         self.label_5.setText(_translate("LoginScreen", "<html><head/><body><p><span style=\" font-size:10pt;\">Password:</span></p></body></html>"))
-
+        
+    def getCredentials(self):
+        username = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        VerifyCredentials.AskDatabase(username,password)
 
 if __name__ == "__main__":
     import sys

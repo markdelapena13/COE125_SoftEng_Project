@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class MainDatabase(object):
-    def setupUi(self, MainWindow):
+    def MainUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(964, 736)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = MainDatabase()
-    ui.setupUi(MainWindow)
+    ui.MainUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
 
