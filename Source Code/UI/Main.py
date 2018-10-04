@@ -16,6 +16,7 @@ from LoginErr import LoginError
 from DAL.Signup import User_signup
 
 
+
 class Ui_LoginScreen(object):
       
       
@@ -74,10 +75,13 @@ class Ui_LoginScreen(object):
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(LoginScreen)
         self.label_5.setGeometry(QtCore.QRect(180, 240, 81, 41))
-        self.label_5.setObjectName("label_5")
+        self.label_5.setObjectName("label_5")   
         self.lineEdit = QtWidgets.QLineEdit(LoginScreen)
         self.lineEdit.setGeometry(QtCore.QRect(280, 180, 231, 31))
         self.lineEdit.setObjectName("lineEdit")
+        Username = self.lineEdit.text()
+       
+
         self.lineEdit_2 = QtWidgets.QLineEdit(LoginScreen)
         self.lineEdit_2.setGeometry(QtCore.QRect(280, 250, 231, 31))
         self.lineEdit_2.setInputMask("")
@@ -88,16 +92,14 @@ class Ui_LoginScreen(object):
         self.lineEdit_2.setPlaceholderText("")
         self.lineEdit_2.setClearButtonEnabled(False)
         self.lineEdit_2.setObjectName("lineEdit_2")
-
+        Password = self.lineEdit_2.text()
         self.retranslateUi(LoginScreen)
         QtCore.QMetaObject.connectSlotsByName(LoginScreen)
 
 
 
         #########    Login Event Initiates   ##############
-        Username = self.lineEdit.text()
-        Password = self.lineEdit_2.text()
-        self.pushButton.clicked.connect(lambda: VerifyCredentials.AskDatabase(Username,Password))
+        self.pushButton.clicked.connect(lambda: VerifyCredentials.AskDatabase("456","123"))
 
 
     def retranslateUi(self, LoginScreen):

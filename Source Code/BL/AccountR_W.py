@@ -7,17 +7,20 @@ from DAL.Check_Acc_from_DB import DB_access
 from DAL.Signup import User_signup
 
 class VerifyCredentials:
-    #this class is for checking the database#
+    
     def AskDatabase(Username1, Password1):
-        Username=Username1
-        Password=Password1
-        DB_access.UserVerify(Username,Password)
+        Var1=Username1
+        Var2=Password1
+        DB_access.UserVerify(Var1,Var2)
 
 
 class Write2DB:
-    #this class is for writing to the Users table in the Database#
     def register():
         Signup.User_signup
-    
-        
 
+
+##class DisplayDB_UI:
+##    
+##        
+##
+##
