@@ -14,7 +14,7 @@ sys.path.append('../')
 from BL.AccountR_W import VerifyCredentials
 from LoginErr import LoginError
 from DAL.Signup import User_signup
-from DAL.MainDB import MainDatabase
+##from UI.MainDB import MainDatabase
 from DAL.Check_Acc_from_DB import DB_access
 
 class Ui_LoginScreen(object):

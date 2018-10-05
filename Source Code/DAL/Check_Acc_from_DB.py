@@ -12,7 +12,7 @@ class DB_access:
         connection = sqlite3.connect("../../Database/InventoryDatabase.db")
         result = connection.execute("SELECT * FROM Users WHERE USERNAME = ? AND PASSWORD = ?",(Username, Password))
         if( len(result.fetchall()) > 0):
-            subprocess.call(['python','../DAL/MainDB.py'])
+            subprocess.call(['python','../UI/MainDB.py'])
             
             
             

@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import subprocess
+import sys
+sys.path.append('../')
 
 class MainDatabase(object):
     def MainUi(self, MainWindow):
@@ -14,9 +17,15 @@ class MainDatabase(object):
         MainWindow.resize(964, 736)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+        
         self.Add_Item = QtWidgets.QPushButton(self.centralwidget)
         self.Add_Item.setGeometry(QtCore.QRect(50, 170, 93, 28))
         self.Add_Item.setObjectName("Add_Item")
+        self.Add_Item.clicked.connect(self.addItem)
+
+
+        
         self.Delet_item = QtWidgets.QPushButton(self.centralwidget)
         self.Delet_item.setGeometry(QtCore.QRect(50, 230, 93, 28))
         self.Delet_item.setObjectName("Delet_item")
@@ -66,7 +75,9 @@ class MainDatabase(object):
         self.Welcum.setText(_translate("MainWindow", "Welcome:"))
         self.ActionLabel.setText(_translate("MainWindow", "User Actions:"))
         self.item_Sort.setText(_translate("MainWindow", "Sort Items"))
-
+        
+    def addItem(self):
+        subprocess.call(['python','../UI/Add_item.py'])
 
 if __name__ == "__main__":
     import sys
