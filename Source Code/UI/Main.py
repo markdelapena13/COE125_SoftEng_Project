@@ -14,8 +14,8 @@ sys.path.append('../')
 from BL.AccountR_W import VerifyCredentials
 from LoginErr import LoginError
 from DAL.Signup import User_signup
-from DAL.Meme import MainDatabase
-
+from DAL.MainDB import MainDatabase
+from DAL.Check_Acc_from_DB import DB_access
 
 class Ui_LoginScreen(object):
       
@@ -69,6 +69,8 @@ class Ui_LoginScreen(object):
         
 ###### event to register user ########
         self.pushButton_2.clicked.connect(self.register)
+        
+        
 
 ########
         self.label_3 = QtWidgets.QLabel(LoginScreen)
@@ -103,9 +105,12 @@ class Ui_LoginScreen(object):
 
 
         #########    Login Event Initiates   ##############
-        
-                                        
         self.pushButton.clicked.connect(self.getCredentials)
+        
+        ###################################################
+                                        
+        
+        
         
         
         
@@ -126,6 +131,8 @@ class Ui_LoginScreen(object):
         password = self.lineEdit_2.text()
         VerifyCredentials.AskDatabase(username,password)
 
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -134,4 +141,6 @@ if __name__ == "__main__":
     ui.setupUi(LoginScreen)
     LoginScreen.show()
     sys.exit(app.exec_())
+
+
 
