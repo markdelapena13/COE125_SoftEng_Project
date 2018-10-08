@@ -9,6 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import subprocess
 import sys
+import sqlite3
 sys.path.append('../')
 
 class MainDatabase(object):
@@ -18,17 +19,21 @@ class MainDatabase(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+
         
         self.Add_Item = QtWidgets.QPushButton(self.centralwidget)
         self.Add_Item.setGeometry(QtCore.QRect(50, 170, 93, 28))
         self.Add_Item.setObjectName("Add_Item")
-        self.Add_Item.clicked.connect(self.addItem)
 
+        self.Add_Item.clicked.connect(self.addItem)
 
         
         self.Delet_item = QtWidgets.QPushButton(self.centralwidget)
         self.Delet_item.setGeometry(QtCore.QRect(50, 230, 93, 28))
         self.Delet_item.setObjectName("Delet_item")
+
+        self.Delet_item.clicked.connect(self.deleteItem)
+        
         self.DB_Table = QtWidgets.QTableWidget(self.centralwidget)
         self.DB_Table.setGeometry(QtCore.QRect(270, 20, 631, 631))
         self.DB_Table.setObjectName("DB_Table")
@@ -40,11 +45,8 @@ class MainDatabase(object):
         self.Item_Number = QtWidgets.QPushButton(self.centralwidget)
         self.Item_Number.setGeometry(QtCore.QRect(50, 290, 93, 28))
         self.Item_Number.setObjectName("Item_Number")
-        self.User_Field = QtWidgets.QLabel(self.centralwidget)
-        self.User_Field.setGeometry(QtCore.QRect(10, 50, 221, 31))
-        self.User_Field.setObjectName("User_Field")
         self.Welcum = QtWidgets.QLabel(self.centralwidget)
-        self.Welcum.setGeometry(QtCore.QRect(10, 20, 101, 21))
+        self.Welcum.setGeometry(QtCore.QRect(10, 20, 211, 61))
         self.Welcum.setObjectName("Welcum")
         self.ActionLabel = QtWidgets.QLabel(self.centralwidget)
         self.ActionLabel.setGeometry(QtCore.QRect(10, 140, 101, 16))
@@ -70,14 +72,15 @@ class MainDatabase(object):
         self.Add_Item.setText(_translate("MainWindow", "Add Item"))
         self.Delet_item.setText(_translate("MainWindow", "Delete Item"))
         self.Quit_button.setText(_translate("MainWindow", "Quit"))
-        self.Item_Number.setText(_translate("MainWindow", "Select Quantity"))
-        self.User_Field.setText(_translate("MainWindow", "Username Appears here"))
-        self.Welcum.setText(_translate("MainWindow", "Welcome:"))
+        self.Item_Number.setText(_translate("MainWindow", "Edit Quantity"))
+        self.Welcum.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Welcome</span></p></body></html>"))
         self.ActionLabel.setText(_translate("MainWindow", "User Actions:"))
         self.item_Sort.setText(_translate("MainWindow", "Sort Items"))
-        
+
     def addItem(self):
         subprocess.call(['python','../UI/Add_item.py'])
+    def deleteItem(self):
+        subprocess.call(['python','../UI/Delete_item.py'])
 
 if __name__ == "__main__":
     import sys
@@ -87,4 +90,3 @@ if __name__ == "__main__":
     ui.MainUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
