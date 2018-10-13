@@ -11,7 +11,6 @@ import subprocess
 import sys
 import sqlite3
 sys.path.append('../')
-
 class MainDatabase(object):
     def MainUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -41,10 +40,17 @@ class MainDatabase(object):
         self.DB_Table.setRowCount(0)
         self.Quit_button = QtWidgets.QPushButton(self.centralwidget)
         self.Quit_button.setGeometry(QtCore.QRect(60, 610, 93, 28))
+
         self.Quit_button.setObjectName("Quit_button")
+        self.Quit_button.clicked.connect(self.close)
+
         self.Item_Number = QtWidgets.QPushButton(self.centralwidget)
         self.Item_Number.setGeometry(QtCore.QRect(50, 290, 93, 28))
         self.Item_Number.setObjectName("Item_Number")
+
+        self.Item_Number.clicked.connect(self.editItem)
+
+
         self.Welcum = QtWidgets.QLabel(self.centralwidget)
         self.Welcum.setGeometry(QtCore.QRect(10, 20, 211, 61))
         self.Welcum.setObjectName("Welcum")
@@ -81,6 +87,10 @@ class MainDatabase(object):
         subprocess.call(['python','../UI/Add_item.py'])
     def deleteItem(self):
         subprocess.call(['python','../UI/Delete_item.py'])
+    def editItem(self):
+        subprocess.call(['python','../UI/Edit_Quantity.py'])
+    def close(self):
+        sys.exit()
 
 if __name__ == "__main__":
     import sys
