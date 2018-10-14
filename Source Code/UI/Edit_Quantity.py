@@ -11,7 +11,7 @@ import sys
 sys.path.append("../")
 from BL.EditQuantityFromMainDB import MainDBEdit
 class Edititem(object):
-    def EditUI(self, Dialog):
+    def NewItemWindow(self, Dialog):
             Dialog.setObjectName("Dialog")
             Dialog.resize(480, 200)
             self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Edititem()
-    ui.EditUI(Dialog)
+    ui.NewItemWindow(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
 

@@ -14,8 +14,8 @@ class VerifyCredentials:
         DB_access.UserVerify(Var1,Var2)
 
 
-##class Write2DB:
-##    def register():
-##        Signup.User_signup
-##
-##
+class Write2DB:
+    def register():
+        Signup.User_signup
+
+

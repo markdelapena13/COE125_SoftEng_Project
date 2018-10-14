@@ -11,6 +11,8 @@ class MainDBWrite:
 
 
     def Add_Items(detail1,detail2):
+
+
         name=detail1
         quantity=detail2
         Add2MainDB.Write2DB(detail1,detail2)

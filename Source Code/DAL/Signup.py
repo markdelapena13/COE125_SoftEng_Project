@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append('../')
 from UI.registerSucc import Succ
 from UI.RegisterError import Ui_ERROR
-
+import subprocess
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = "../../Database/InventoryDatabase.db"
@@ -25,20 +25,27 @@ class User_signup(object):
         self.succ = Succ()
         self.succ.setupUi(self.window)
         self.window.show()
-		
-		
-     
+
     def registerUser(self):
         Username=self.UserEnter.text()
-        Password=self.PassEnter.text()
-        sql='''INSERT INTO Users(Username,Password) VALUES(?,?)'''
-        cur=conn.cursor()
-        values=(Username,Password)
-        cur.execute(sql, values)
-        conn.commit()
-        conn.close()
-        #displayError(self)
-        
+        connection = sqlite3.connect("../../Database/InventoryDatabase.db")
+        result = connection.execute("SELECT * FROM User WHERE username = ?",(Username, ))
+        rows = result.fetchall()
+        if( len(rows) > 0):
+            subprocess.call(['python','../UI/RegisterError.py'])
+
+            
+        else:
+            Username=self.UserEnter.text()
+            Password=self.PassEnter.text()
+            sql="INSERT INTO User(username,password) VALUES(?,?)"
+            cur=conn.cursor()
+            values=(Username,Password)
+            cur.execute(sql, values)
+            conn.commit()
+            conn.close()
+            subprocess.call(['python','../UI/registerSucc.py'])
+
     def displayError(self):
         self.window=QtWidgets.QDialog()
         self.regerr= Ui_ERROR()
@@ -46,7 +53,7 @@ class User_signup(object):
         self.window.show()
 
 
-    
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(614, 378)
@@ -64,14 +71,14 @@ class User_signup(object):
         self.PassLabel.setObjectName("PassLabel")
 
 
-        
+
         ####### Field to Enter Username #########
         self.UserEnter = QtWidgets.QLineEdit(Dialog)
         self.UserEnter.setGeometry(QtCore.QRect(150, 80, 271, 31))
         self.UserEnter.setObjectName("UserEnter")
 
         ######## Field to Enter Password #######
-                                            
+
         self.PassEnter = QtWidgets.QLineEdit(Dialog)
         self.PassEnter.setGeometry(QtCore.QRect(150, 190, 281, 31))
         self.PassEnter.setObjectName("PassEnter")
@@ -83,11 +90,11 @@ class User_signup(object):
         self.pushReg.setGeometry(QtCore.QRect(230, 280, 121, 41))
         self.pushReg.setObjectName("pushReg")
         self.pushReg.clicked.connect(self.registerUser)
-        self.pushReg.clicked.connect(self.registerSucc)
-        
-        
+       
 
-        
+
+
+
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
@@ -102,8 +109,8 @@ class User_signup(object):
         self.pushReg.setText(_translate("Dialog", "Register"))
 
 
-        
-        
+
+
 
 
 if __name__ == "__main__":

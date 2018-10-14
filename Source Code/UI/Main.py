@@ -16,8 +16,8 @@ from LoginErr import LoginError
 from DAL.Signup import User_signup
 ##from UI.MainDB import MainDatabase
 from DAL.Check_Acc_from_DB import DB_access
-from BL.CallSignup import Write2DB
-class MainWindow(object):
+
+class Ui_LoginScreen(object):
       
 
     def showMainDB(self):
@@ -28,6 +28,12 @@ class MainWindow(object):
         
     def signupcheck(self):
         print("register is pressed")
+    
+    def LoginError(self):
+        self.window = QtWidgets.QDialog()
+        self.err = LoginError()
+        self.err.setupUi(self.window)
+        self.window.show()
 
 
     def register(self):
@@ -61,9 +67,9 @@ class MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
 
         
-###### button to register user ##########################
-        self.pushButton_2.clicked.connect(Write2DB.callUserSignup)
-#########################################################        
+###### event to register user ########
+        self.pushButton_2.clicked.connect(self.register)
+        
         
 
 ########
@@ -103,12 +109,6 @@ class MainWindow(object):
         
         ###################################################
                                         
-        
-        
-        
-        
-        
-
     def retranslateUi(self, LoginScreen):
         _translate = QtCore.QCoreApplication.translate
         LoginScreen.setWindowTitle(_translate("LoginScreen", "User Login"))
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     LoginScreen = QtWidgets.QDialog()
-    ui = MainWindow()
+    ui = Ui_LoginScreen()
     ui.setupUi(LoginScreen)
     LoginScreen.show()
     sys.exit(app.exec_())
