@@ -1,7 +1,7 @@
 import random
 import sys
 from unittest import TestCase
-sys.path.append('../')
+sys.path.append('../Source Code')
 
 from DAL.Write2MainDB import Add2MainDB
 from UI.MainDB import MainDatabase
